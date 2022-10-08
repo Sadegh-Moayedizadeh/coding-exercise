@@ -1,6 +1,5 @@
 # https://quera.org/problemset/3538/
 
-
 from typing import Set
 
 all_week_days = {
