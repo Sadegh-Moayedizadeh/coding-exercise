@@ -1,4 +1,4 @@
-# https://quera.org/contest/assignments/44345/problems/148509
+# https://quera.org/problemset/148638/
 
 from typing import Iterable, Tuple
 
