@@ -1,4 +1,4 @@
-quera_problems
+Quera Problems
 ===============
 
 * This repository contains my solutions to problems from quera.org website.
