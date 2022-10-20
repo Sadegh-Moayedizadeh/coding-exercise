@@ -1,2 +1,4 @@
-# quera_problems
-solutions to problmes from quera.ir
+quera_problems
+===============
+
+solutions to problmes from quera.org
