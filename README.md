@@ -1,5 +1,9 @@
-Quera Problems
-===============
+Leetcode
+----------
+
+
+Quera
+---------------
 
 * This repository contains my solutions to problems from quera.org website.
 * Currently there are solutions in two sections: djago problems and algorithm
