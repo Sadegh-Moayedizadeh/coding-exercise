@@ -2,10 +2,11 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.contrib.auth import login
+from django.contrib.auth.hashers import check_password
 from typing import Optional
 
 from .models import Account
-from .forms import SignUpForm
+from .forms import SignUpForm, LoginForm
 
 
 def home(request: HttpRequest) -> HttpResponse:
@@ -23,12 +24,24 @@ def signup(request: HttpRequest) -> Optional[HttpResponse]:
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return HttpResponseRedirect('team/')
-        HttpResponseRedirect('signup/')
+            return HttpResponseRedirect('/account/team/')
+        HttpResponseRedirect('/account/signup/')
 
 
-def login_account(request):
-    pass
+def login_account(request: HttpRequest) -> Optional[HttpResponse]:
+    if request.method == 'GET':
+        return render(request, 'login.html', context={'form': LoginForm()})
+    elif request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user_qs = Account.objects.filter(username=username)
+            if user_qs.exists() and \
+                    check_password(password, user_qs.first().password):
+                login(request, user_qs.first())
+                return HttpResponseRedirect('/home/')
+        return HttpResponseRedirect('/account/login/')
 
 
 def logout_account(request):
