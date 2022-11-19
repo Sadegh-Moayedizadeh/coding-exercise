@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
+from django.contrib.auth import login
 from typing import Optional
 
 from .models import Account
@@ -18,7 +19,12 @@ def signup(request: HttpRequest) -> Optional[HttpResponse]:
     if request.method == 'GET':
         return render(request, 'signup.html', context={'form': SignUpForm()})
     elif request.method == 'POST':
-        pass
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return HttpResponseRedirect('team/')
+        HttpResponseRedirect('signup/')
 
 
 def login_account(request):
