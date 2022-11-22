@@ -1,5 +1,8 @@
 Leetcode
 ----------
+* There is three packages for each class of problems; easy, medium and hard.
+* The name of each file denotes the official name of the algorithm problem
+  in the website.
 
 
 Quera
