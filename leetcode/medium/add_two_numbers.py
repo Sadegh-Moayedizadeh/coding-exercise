@@ -20,9 +20,33 @@ class Solution:
         l1: ListNode[int],
         l2: ListNode[int]
     ) -> ListNode[int]:
-        first_number = self._convert_list_to_number(l1)
-        second_number = self._convert_list_to_number(l2)
-        return self._convert_number_into_list(first_number + second_number)
+        first_number = self._convert_list_to_number(
+            self._convert_linked_list_to_list(l1))
+        second_number = self._convert_list_to_number(
+            self._convert_linked_list_to_list(l2))
+        return self._convert_list_to_linked_list(
+            self._convert_number_into_list(first_number + second_number))
+
+    def _convert_linked_list_to_list(
+        self,
+        linked_list: ListNode[int]
+    ) -> List[int]:
+        result = []
+        node = linked_list
+        while node:
+            result.append(node.val)
+            node = node.next
+        return result
+
+    def _convert_list_to_linked_list(self, lst: List[int]) -> ListNode[int]:
+        first_node = ListNode(val=lst[0])
+        moving_node = first_node
+        index = 1
+        while index < len(lst):
+            new_node = ListNode(val=lst[index])
+            moving_node.next = new_node
+            moving_node = new_node
+        return first_node
 
     def _convert_list_to_number(self, lst: List[int]) -> int:
         return int(''.join(map(str, lst))[::-1])
