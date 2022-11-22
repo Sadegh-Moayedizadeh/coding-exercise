@@ -1,13 +1,25 @@
 import pytest
-from typing import List
+from typing import List, Generic, TypeVar, Optional
+
+ValueType = TypeVar('ValueType')
+
+
+class ListNode(Generic[ValueType]):
+    def __init__(
+        self,
+        val: ValueType = 0,
+        next: Optional[ListNode] = None
+    ) -> None:
+        self.val = val
+        self.next = next
 
 
 class Solution:
     def addTwoNumbers(
         self,
-        l1: List[int],
-        l2: List[int]
-    ) -> List[int]:
+        l1: ListNode[int],
+        l2: ListNode[int]
+    ) -> ListNode[int]:
         first_number = self._convert_list_to_number(l1)
         second_number = self._convert_list_to_number(l2)
         return self._convert_number_into_list(first_number + second_number)
