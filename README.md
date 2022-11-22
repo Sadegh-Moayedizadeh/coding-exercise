@@ -3,6 +3,8 @@ Leetcode
 * There is three packages for each class of problems; easy, medium and hard.
 * The name of each file denotes the official name of the algorithm problem
   in the website.
+* Each file may contain a test following pytest framework considering the
+  complexity of the problem.
 
 
 Quera
