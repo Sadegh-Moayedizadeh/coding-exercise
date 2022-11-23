@@ -1,13 +1,11 @@
 import pytest
-from typing import List, Generic, TypeVar, Optional
-
-ValueType = TypeVar('ValueType')
+from typing import List, Optional
 
 
-class ListNode(Generic[ValueType]):
+class ListNode:
     def __init__(
         self,
-        val: ValueType = 0,
+        val = 0,
         next: Optional[ListNode] = None
     ) -> None:
         self.val = val
@@ -17,52 +15,31 @@ class ListNode(Generic[ValueType]):
 class Solution:
     def addTwoNumbers(
         self,
-        l1: ListNode[int],
-        l2: ListNode[int]
-    ) -> ListNode[int]:
-        first_number = self._convert_list_to_number(
-            self._convert_linked_list_to_list(l1))
-        second_number = self._convert_list_to_number(
-            self._convert_linked_list_to_list(l2))
-        return self._convert_list_to_linked_list(
-            self._convert_number_into_list(first_number + second_number))
+        l1: Optional[ListNode],
+        l2: Optional[ListNode]
+    ) -> ListNode:
+        extra = 0
+        dummy_node = ListNode()
+        current_node = dummy_node
+        while l1 or l2:
+            s = self._get_val_or_zero(l1) + self._get_val_or_zero(l2) + extra
+            new_node = ListNode()
+            if s >= 10:
+                extra = 1
+                new_node.val = s - 10
+            else:
+                extra = 0
+                new_node.val = s
+            current_node.next = new_node
+            current_node = new_node
+            
+            l1 = l1.next if l1 else l1
+            l2 = l2.next if l2 else l2
+        if extra:
+            current_node.next = ListNode(1)
+        return dummy_node.next
 
-    def _convert_linked_list_to_list(
-        self,
-        linked_list: ListNode[int]
-    ) -> List[int]:
-        result = []
-        node = linked_list
-        while node:
-            result.append(node.val)
-            node = node.next
-        return result
-
-    def _convert_list_to_linked_list(self, lst: List[int]) -> ListNode[int]:
-        first_node = ListNode(val=lst[0])
-        moving_node = first_node
-        index = 1
-        while index < len(lst):
-            new_node = ListNode(val=lst[index])
-            moving_node.next = new_node
-            moving_node = new_node
-        return first_node
-
-    def _convert_list_to_number(self, lst: List[int]) -> int:
-        return int(''.join(map(str, lst))[::-1])
-
-    def _convert_number_into_list(self, number) -> List[int]:
-        return list(map(int, str(number)))[::-1]
-
-
-@pytest.mark.parametrize('l1, l2, expected_result', [
-    ([2, 4, 3], [5, 6, 4], [7, 0, 8]),
-    ([0], [0], [0]),
-    ([9,9,9,9,9,9,9], [9,9,9,9], [8,9,9,9,0,0,0,1])
-])
-def test(l1: List[int], l2: List[int], expected_result: List[int]) -> None:
-    # Arrange, Act
-    actual_result = Solution().addTwoNumbers(l1, l2)
-
-    # Assert
-    assert actual_result == expected_result
+    def _get_val_or_zero(self, node: Optional[ListNode]) -> int:
+        if node is None:
+            return 0
+        return node.val
