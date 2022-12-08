@@ -1,22 +1,16 @@
-from typing import Dict
-from collections import defaultdict
-
-
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        max_len = 0
-        for i in range(len(s)):
-            current_len = 0
-            characters_so_far = set()
-            for character in s[i:]:
-                if character in characters_so_far:
-                    break
-                characters_so_far.add(character)
-                current_len += 1
-            if current_len > max_len:
-                max_len = current_len
-        return max_len
-
-
-if __name__ == '__main__':
-    print(Solution().lengthOfLongestSubstring(''))
+        result = 0
+        i, j = 0, 0
+        characters_so_far = {}
+        while j < len(s):
+            if s[j] in characters_so_far and characters_so_far[s[j]] >= i:
+                i = characters_so_far[s[j]] + 1
+                characters_so_far[s[j]] = j
+                j += 1
+                continue
+            characters_so_far[s[j]] = j
+            if j - i + 1 > result:
+                result = j - i + 1
+            j += 1
+        return result
