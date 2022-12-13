@@ -1,5 +1,5 @@
-from typing import List, Tuple, Iterable
 import re
+from typing import Iterable, List, Tuple
 
 
 def compress(string: str) -> str:

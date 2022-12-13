@@ -1,11 +1,10 @@
 import json
 
+# Create your tests here.
+from app.models import Book
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.test.client import Client
-
-# Create your tests here.
-from app.models import Book
 
 
 class SimpleTest(TestCase):

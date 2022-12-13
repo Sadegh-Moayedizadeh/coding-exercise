@@ -1,6 +1,6 @@
 # https://quera.org/problemset/108670/
 
-from typing import Tuple, List
+from typing import List, Tuple
 
 
 def remove_character_from_string(string: str, index: int) -> str:

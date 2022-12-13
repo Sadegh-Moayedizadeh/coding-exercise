@@ -1,11 +1,10 @@
 import json
 from decimal import Decimal
 
-from django.test import TestCase, Client
-from django.shortcuts import reverse
-
 from app.forms import ProductForm
-from app.models import Product, Order, Category, OrderItem
+from app.models import Category, Order, OrderItem, Product
+from django.shortcuts import reverse
+from django.test import Client, TestCase
 
 
 class TestSample(TestCase):

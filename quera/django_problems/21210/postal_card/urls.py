@@ -1,5 +1,4 @@
 from django.urls import path
-
 from postal_card import views
 
 urlpatterns = [

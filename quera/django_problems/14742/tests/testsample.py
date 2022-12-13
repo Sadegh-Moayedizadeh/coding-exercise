@@ -1,9 +1,9 @@
-from django.test import TestCase
 from datetime import timedelta
 
+from blog.models import *
+from django.test import TestCase
 from django.utils import timezone
 from django.utils.timezone import datetime
-from blog.models import *
 
 
 class SampleTest(TestCase):

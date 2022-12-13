@@ -1,9 +1,8 @@
-from django.test import TestCase, Client
-from django.urls import reverse
-
+from account.forms import *
 from account.models import *
 from account.views import *
-from account.forms import *
+from django.test import Client, TestCase
+from django.urls import reverse
 
 
 class TestAll(TestCase):

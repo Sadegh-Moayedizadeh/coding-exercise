@@ -1,8 +1,10 @@
-from django.shortcuts import render
-from .models import Book, Borrowing
-from django.http import HttpResponse
-from django.contrib.auth.models import User
 import json
+
+from django.contrib.auth.models import User
+from django.http import HttpResponse
+from django.shortcuts import render
+
+from .models import Book, Borrowing
 
 
 def get_book_users(request, book_id):

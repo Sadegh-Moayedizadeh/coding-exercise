@@ -1,10 +1,8 @@
-from django.test import TestCase
-from django.utils import timezone
-
-from freezegun import freeze_time
-
 from account.models import User
 from blog.models import Article
+from django.test import TestCase
+from django.utils import timezone
+from freezegun import freeze_time
 
 
 class MigrationTest(TestCase):

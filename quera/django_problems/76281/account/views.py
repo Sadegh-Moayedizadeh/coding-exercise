@@ -1,12 +1,13 @@
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
-from django.contrib.auth import login, logout
-from django.contrib.auth.hashers import check_password
 from typing import Optional
 
+from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import check_password
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
+
+from .forms import LoginForm, SignUpForm, TeamForm
 from .models import Account, Team
-from .forms import SignUpForm, LoginForm, TeamForm
 
 
 def home(request: HttpRequest) -> HttpResponse:

@@ -1,5 +1,6 @@
-import pytest
 from typing import List, Optional
+
+import pytest
 
 
 class ListNode:
