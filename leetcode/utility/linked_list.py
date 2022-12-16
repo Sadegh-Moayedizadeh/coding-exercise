@@ -13,6 +13,8 @@ def to_list(head: ListNode):
 
 
 def to_node(lst) -> ListNode:
+    if not lst:
+        return ListNode()
     head = ListNode(lst[0])
     new_head = head
     for item in lst[1:]:
