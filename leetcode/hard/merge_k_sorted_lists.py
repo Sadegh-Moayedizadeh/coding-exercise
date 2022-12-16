@@ -1,28 +1,7 @@
-from queue import PriorityQueue, Empty
+from queue import PriorityQueue
 from typing import List, Optional
 
 from leetcode.utility import ListNode, to_list, to_node
-
-
-class Value:
-    def __init__(self, val: int, index: int) -> None:
-        self.val = val
-        self.index = index
-
-    def __eq__(self, o):
-        return self.val == o.val
-
-    def __lt__(self, o):
-        return self.val < o.val
-
-    def __le__(self, o):
-        return self.val <= o.val
-
-    def __gt__(self, o):
-        return self.val > o.val
-
-    def __ge__(self, o):
-        return self.val >= o.val
 
 
 class Solution:
@@ -36,25 +15,22 @@ class Solution:
         q = PriorityQueue()
         for i, node in enumerate(lists):
             if node:
-                q.put(Value(node.val, i))
+                q.put((node.val, i))
         head = ListNode()
         new_head = head
-        while True:
-            try:
-                value = q.get_nowait()
-            except Empty:
-                break
+        while not q.empty():
+            value = q.get_nowait()
 
-            new_head.val = value.val
+            new_head.val = value[0]
             new_head.next = ListNode()
             previous_head = new_head
             new_head = new_head.next
 
-            current_list = lists[value.index]
+            current_list = lists[value[1]]
             current_list = current_list.next
-            lists[value.index] = current_list
+            lists[value[1]] = current_list
             if current_list:
-                q.put(Value(current_list.val, value.index))
+                q.put((current_list.val, value[1]))
         previous_head.next = None
         return head
 

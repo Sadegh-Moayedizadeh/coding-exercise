@@ -1,3 +1,6 @@
+from typing import Optional
+
+
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
@@ -12,9 +15,9 @@ def to_list(head: ListNode):
     return result
 
 
-def to_node(lst) -> ListNode:
+def to_node(lst) -> Optional[ListNode]:
     if not lst:
-        return ListNode()
+        return None
     head = ListNode(lst[0])
     new_head = head
     for item in lst[1:]:
