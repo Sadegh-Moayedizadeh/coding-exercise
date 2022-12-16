@@ -1,4 +1,4 @@
-from typing import List, Iterable, Tuple
+from typing import Iterable, List, Tuple
 
 
 class Solution:
