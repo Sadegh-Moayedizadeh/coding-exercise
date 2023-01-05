@@ -1,4 +1,5 @@
 from typing import Optional
+
 from leetcode.utility import ListNode, to_list, to_node
 
 
