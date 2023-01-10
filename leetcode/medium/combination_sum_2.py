@@ -1,36 +1,39 @@
 from typing import List
+from collections import Counter
 
 
 class Solution:
-    def __init__(self) -> None:
-        self._cache = {}
-
     def combinationSum2(
         self, candidates: List[int], target: int
     ) -> List[List[int]]:
-        if target in self._cache:
-            return self._cache[(target, tuple(candidates))]
-        if target <= 0:
-            return []
+        def backtrack(comb, remain, curr, counter, results):
+            if remain == 0:
+                results.append(list(comb))
+                return
+            elif remain < 0:
+                return
 
-        result = []
-        for number in candidates:
-            if number == target:
-                result.append([number])
-            else:
-                new_candidates = candidates.copy()
-                new_candidates.remove(number)
-                result.extend([
-                    [number] + res
-                    for res
-                    in self.combinationSum2(new_candidates, target - number)
-                ])
-        no_repetition_result = set()
-        for lst in result:
-            no_repetition_result.add(tuple(sorted(lst)))
-        result = list(map(list, no_repetition_result))
-        self._cache[(target, tuple(candidates))] = result
-        return list(result)
+            for next_curr in range(curr, len(counter)):
+                candidate, freq = counter[next_curr]
+
+                if freq <= 0:
+                    continue
+
+                comb.append(candidate)
+                counter[next_curr] = (candidate, freq-1)
+
+                backtrack(comb, remain - candidate, next_curr, counter, results)
+
+                counter[next_curr] = (candidate, freq)
+                comb.pop()
+
+        results = []
+        counter = Counter(candidates)
+        counter = [(c, counter[c]) for c in counter]
+
+        backtrack([], target, 0, counter, results)
+
+        return results
 
 
 print(Solution().combinationSum2([10,1,2,7,6,1,5], 8))
