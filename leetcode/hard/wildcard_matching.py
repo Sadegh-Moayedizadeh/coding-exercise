@@ -25,10 +25,7 @@ class Solution:
             if s[si] != p[pi] and p[pi] not in ['*', '?']:
                 return False
             if p[pi] == '*':
-                return dp(si, pi + 1) or any(
-                    dp(i, pi)
-                    for i in range(si + 1, len(s) + 1)
-                )
+                return dp(si, pi + 1) or dp(si + 1, pi)
             return dp(si + 1, pi + 1)
 
         return dp(0, 0)
