@@ -1,5 +1,6 @@
 class Solution:
     def isMatch(self, s: str, p: str) -> bool:
+        p = self._optimize_pattern(p)
         _cache = {}
         def cache(func):
             def wrap(si, pi):
@@ -32,6 +33,14 @@ class Solution:
 
         return dp(0, 0)
 
+    def _optimize_pattern(self, p: str) -> str:
+        result_list = []
+        for char in p:
+            if result_list and char == result_list[-1] == '*':
+                continue
+            result_list.append(char)
+        return ''.join(result_list)
+
 
 print(Solution().isMatch('aaa', 'aa?'))  # True
 print(Solution().isMatch('aa', 'a'))  # False
@@ -42,4 +51,4 @@ print(Solution().isMatch('cb', '*cb'))  # True
 print(Solution().isMatch('cb', '*a'))  # False
 print(Solution().isMatch('abcdefg', '*c*'))  # True
 print(Solution().isMatch('cdefg', 'c*fg'))  # True
-print(Solution().isMatch('abcdefg', '*c*fg'))  # True
+print(Solution().isMatch('abcdefg', '*c****fg'))  # True
