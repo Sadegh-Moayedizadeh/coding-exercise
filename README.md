@@ -1,4 +1,11 @@
-Leetcode
+# Coding Exercise
+This repository contains solution to coding challanges from several websites
+for that purpose. Packages are divided based on the website from which the
+problems are drawn. Most of the problems are algorithmic, some of them are
+technological, like Django, Bash, and SQL.
+
+
+## Leetcode
 ----------
 * There is three packages for each class of problems; easy, medium and hard.
 * The name of each file denotes the official name of the algorithm problem
@@ -7,7 +14,7 @@ Leetcode
   complexity of the problem.
 
 
-Quera
+## Quera
 ---------------
 
 * This repository contains my solutions to problems from quera.org website.
