@@ -19,5 +19,5 @@ class Solution:
                 return True
             if index > len(nums) - 1:
                 return False
-            return any(dp(index + j + 1) for j in range(nums[index]))
+            return any(dp(index + j) for j in range(nums[index], 0, -1))
         return dp(0)
