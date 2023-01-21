@@ -3,12 +3,10 @@ from typing import List
 
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-        result = float('-inf')
-        for i in range(len(nums)):
-            s = 0
-            for j in range(i, len(nums)):
-                s += nums[j]
-                result = max(s, result)
+        result = s = nums[0]
+        for i in range(1, len(nums)):
+            s = max(s + nums[i], nums[i])
+            result = max(s, result)
         return result
 
 
