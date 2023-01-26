@@ -1,6 +1,6 @@
-from typing import List
 from enum import Enum
 from pprint import pprint
+from typing import List
 
 
 class Direction(Enum):

@@ -1,5 +1,5 @@
-from typing import List
 import heapq
+from typing import List
 
 
 class Solution:
